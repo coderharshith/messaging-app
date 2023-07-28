@@ -1,0 +1,95 @@
+:root{
+  --bg: linear-gradient(to right, #F90728 , #1538E6);
+  --i_text:#fff;
+  --d_text:#333;
+  --btn:linear-gradient(to right,#1538E6,#F90728 );
+}
+.error {
+    background: #F2DEDE;
+    color: #A94442;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    margin: 20px auto;
+  }
+  
+  .success {
+    background: #D4EDDA;
+    color: #40754C;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    margin: 20px auto;
+    text-align:center;
+  }
+   .li1 ,.li2{
+    list-style: none;
+  }
+button{
+  
+  height: 45px;
+  border: none;
+  color: #fff;
+  font-size: 17px;
+  background: #333;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 13px;
+  display:center;
+  width:100%;
+  }
+  
+  .in{
+    height: 45px;
+    border: none;
+    color: #fff;
+    font-size: 17px;
+    background: #333;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 13px;
+    display:center;
+    width:100%;
+  }
+  a{
+    text-decoration: none;
+    font-size:bold;
+  }
+
+  .container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .3rem;
+}
+
+a .viwe_page{
+   height: 45px;
+   width:200px;
+   border: none;
+   color: #fff;
+    font-size: 17px;
+    background: #333;
+   border-radius: 5px;
+   cursor: pointer;
+   margin-top: 13px; 
+   padding: 10px;
+   }
+   @media(max-width:750px){
+    .container{
+    display: flex;
+    flex-direction: column;
+    gap:.3em; 
+    }
+    .li1{
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+    }
+    .li2{
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+    }
+   }
+ 

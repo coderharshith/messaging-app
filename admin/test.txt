@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Lock the text...</title>
+
+	<style>
+		*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	position: relative;
+}
+body{
+	width: 100%;
+	min-height: 100vh;
+	background: #111;
+}
+.flex{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.c{
+	flex-flow: column;
+}
+.main{
+	width: 80%;
+	justify-content: space-between;
+}
+.main .pan{
+	width: 400px;
+	height: 300px;
+	border: 5px solid #fff;
+	--br:10px;
+	background: #000;
+	border-radius: var(--br);
+}
+.pan.p1{
+	--col: #ff0048;
+  border: 5px solid var(--col);
+}
+.pan.p2{
+	--col: #00e7ff;
+  border: 5px solid var(--col);
+}
+.main .pan textarea{
+	width: 100%;
+	height: 100%;
+	resize: none;
+	border-radius: var(--br);
+	background: transparent;
+	color: var(--col);
+	outline: none;
+	border: none;
+	font-size: 2em;
+	font-weight: bold;
+	padding: 10px;
+}
+
+.main .line{
+	position: absolute;
+	width: calc(100% - 600px);
+	background: #333;
+	height: 30px;
+	left: 300px;
+	background: linear-gradient(90deg, #ff0048,#00e7ff)
+}
+.lock{
+	width: 150px;
+	aspect-ratio: 1/1;
+  border: 5px solid #fff;
+	border-radius: 50%;
+	background: #000;
+	padding-bottom: 5px;
+}
+.lock .down{
+	width: 70px;
+	height: 50px;
+	background: #0f0;
+	border-radius: 5px;
+}
+.lock .kundi{
+	width: 50px;
+	height: 35px;
+	border: 5px solid #0f0;
+	border-radius: 50% 50% 0 0/25px 25px 0 0;
+	border-bottom: none;
+	transform-origin: right bottom;
+	transition: all .1s;
+}
+.lock .down .hole{
+	width: 10px;
+	aspect-ratio: 1/1;
+	background: #000;
+	border-radius: 50%;
+	top: 10px;
+}
+
+	</style>
+</head>
+<body class="flex">
+
+	<div class="main flex">
+
+		<div class="line flex">
+			<div class="circle flex">
+				<div class="lock flex c">
+					<div class="kundi"></div>
+					<div class="down flex">
+						<div class="hole"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="pan p1">
+			<textarea oninput="encode()"></textarea>
+		</div>
+
+		<div class="pan p2">
+			<textarea oninput="decode()"></textarea>
+		</div>
+
+	</div>
+	
+<script>
+	var log=console.log;
+	function op(e){return document.querySelector(e)}
+	function opp(e){return document.querySelectorAll(e)}
+
+	var inBox=op(".pan.p1 textarea");
+	var outBox=op(".pan.p2 textarea");
+	var kundi=op(".kundi");
+
+	[inBox,outBox].forEach(val=>{
+		val.onkeydown=()=>{
+			kundi.style.transform="rotate(15deg)";
+		}
+		val.onkeyup=()=>{
+			kundi.style.transform="rotate(0deg)";
+		}
+	})
+
+	function encode(){
+		outBox.value=encrypt(inBox.value);
+	}
+	function decode(){
+		inBox.value=decrypt(outBox.value);
+	}
+
+
+	var enc=",t$j)Y[ ZR(M@I'Bha*H+]<:E4nKk;^P8G/52boT?-q#|levcJ\"sg&NuAxzy170LUFfwW=.Dd9O{pXS>}m!_C%Q3Vri6",
+	raw="! @#$%^&*()_+1234567890-=qwertyuiop[]|}{POIUYTREWQasdfghjkl;'\":LKJHGFDSAzxcvbnm,./?><MNBVCXZ";
+
+	enc=enc.split("");
+	raw=raw.split("");
+
+	function encrypt(txt){
+		var encd="";
+		txt=getMixed(txt);
+		for(let val of txt){
+			var i=raw.indexOf(val),
+			c=(i>=0)?enc[i]:val;
+			encd=c+encd;
+		}
+		return encd;
+	}
+
+	function decrypt(txt){
+		var dec="";
+		for(let val of txt){
+			var i=enc.indexOf(val),
+			c=(i>=0)?raw[i]:val;
+			dec=c+dec;
+		}
+		dec=getFixed(dec);
+		log(dec)
+		return dec;
+	}
+
+	function getMixed(txt){
+		txt=txt.split("");
+		var encd="",l=txt.length;
+		for(let i=0; i< l; i++){
+			encd+=txt[i%2==0?"pop":"shift"]();
+		}
+		return encd;
+	}
+
+	function getFixed(txt){
+		var p1="",p2="",l=txt.length;
+		for(let i=0; i<=l; i++){
+			if(i%2==0){
+				p2=txt.charAt(i)+p2;
+			}else{
+				p1=p1+txt.charAt(i);
+			}
+		}
+		return p1+p2;
+	}
+
+</script>
+</body>
+</html>

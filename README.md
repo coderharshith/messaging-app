@@ -2,7 +2,6 @@
 # This project is developed by Harshith and Team
 
 ### Author : Harshith
-## Other Authors :- Williams , Rakshitha,Muthamma
 
 ## Full Tutorial of site is given below 
 [Video Tutorial for set up this project](help.html)
